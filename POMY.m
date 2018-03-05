@@ -80,8 +80,12 @@ global obraz
 set(handles.ScalNumber,'String','');
 sciezka=uigetfile('*.jpg');
 obraz=imread(sciezka);
-axes(handles.LoadedPicture)
+set(handles.LoadedPicture,'Units','pixels');
+resizePos = get(handles.LoadedPicture,'Position');
+obraz= imresize(obraz, [resizePos(3) resizePos(3)]);
+axes(handles.LoadedPicture);
 imshow(obraz);
+set(handles.LoadedPicture,'Units','normalized');
 h = msgbox('Zaznacz dwa punkty, a nastêpnie wpisz rzeczywist± odleg³o¶æ miêdzy nimi. Potem naci¶nij przycisk SKALUJ','Skalowanie','help');
 waitfor(h);
 
@@ -140,18 +144,21 @@ function ScalBtn_Callback(hObject, eventdata, handles)
 % hObject    handle to ScalBtn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+bool =true;
 x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  if isempty(x)
      h = msgbox('Wprowad¼ warto¶æ liczbow±!','B³±d','error');
      set(handles.ScalNumber,'String','');
+     bool =false;
  end
  if (x<=0)
      h = msgbox('Wprowad¼ warto¶æ liczbow±!','B³±d','error');
      set(handles.ScalNumber,'String','');
      x=[];
+     bool =false;
  end
  
+ if(bool)
  x1=handles.x1;
  x2=handles.x2;
  y1=handles.y1;
@@ -159,6 +166,11 @@ x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  odleglosc = sqrt((x1-x2)^2+(y1-y2)^2);
  wartosc_piksela=x/odleglosc;
 
+ Image = imread('zdj01.jpg'); %podac obrazek
+ myIcon = imresize(Image, [200, 200]);
+ userPrompt = sprintf('Zaznacz odpowiednie punkty w przedstawionej kolejno¶ci');
+ msgbox(userPrompt, 'Instrukcja zaznaczania punktów', 'custom', myIcon); % Note: custom is arg 3 now!
+ end
 %[x,y] = ginput(6);
 %hold(handles.LoadedPicture,'on');
 %plot(x,y,'ro');
