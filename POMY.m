@@ -81,9 +81,9 @@ sciezka=uigetfile('*.jpg');
 obraz=imread(sciezka);
 axes(handles.LoadedPicture)
 imshow(obraz);
-[x,y] = ginput(6);
-axes(handles.PictureWithPoints);
-plot(x,y,'*');
+%[x,y] = ginput(6);
+%axes(handles.PictureWithPoints);
+%plot(x,y,'*');
 
 % --- Executes on button press in ReturnBtn.
 function ReturnBtn_Callback(hObject, eventdata, handles)

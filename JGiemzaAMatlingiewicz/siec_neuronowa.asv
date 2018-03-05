@@ -1,5 +1,0 @@
-% X - wektor wartosci wejsciowych (obraz?)
-% W - macierz wag 
-% B - wektor biasu
-% Y - macierz wartosci wyjsciowych
-Y=hardlim(W*X,B);
