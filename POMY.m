@@ -77,10 +77,13 @@ function LoadBtn_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global obraz 
-sciezka=uigetfile({'*.png';'*.jpg';'*.bmp'});
+sciezka=uigetfile('*.jpg');
 obraz=imread(sciezka);
 axes(handles.LoadedPicture)
 imshow(obraz);
+[x,y] = ginput(6);
+axes(handles.PictureWithPoints);
+plot(x,y,'*');
 
 % --- Executes on button press in ReturnBtn.
 function ReturnBtn_Callback(hObject, eventdata, handles)
