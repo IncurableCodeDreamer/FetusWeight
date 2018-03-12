@@ -77,9 +77,11 @@ function LoadBtn_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global obraz 
+global rozmiar_obrazu;
 set(handles.ScalNumber,'String','');
 sciezka=uigetfile('*.jpg');
 obraz=imread(sciezka);
+rozmiar_obrazu = size(obraz);
 set(handles.LoadedPicture,'Units','pixels');
 resizePos = get(handles.LoadedPicture,'Position');
 obraz= imresize(obraz, [resizePos(3) resizePos(3)]);
@@ -144,6 +146,8 @@ function ScalBtn_Callback(hObject, eventdata, handles)
 % hObject    handle to ScalBtn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global rozmiar_obrazu;
+global obraz;
 bool =true;
 x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  if isempty(x)
@@ -163,17 +167,47 @@ x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  x2=handles.x2;
  y1=handles.y1;
  y2=handles.y2;
- odleglosc = sqrt((x1-x2)^2+(y1-y2)^2);
- wartosc_piksela=x/odleglosc;
+ odleglosc = sqrt((x1-x2)^2+(y1-y2)^2)
+ wartosc_piksela=x/odleglosc
+ end 
+ 
+ set(handles.LoadedPicture,'Units','pixels');
+ resizePos = get(handles.LoadedPicture,'Position');
+ obraz= imresize(obraz, [resizePos(3) resizePos(3)]);
+ axes(handles.LoadedPicture);
+ imshow(obraz);
+ 
+ hFigure = figure;
+ set(hFigure, 'MenuBar', 'none');
+ set(hFigure, 'ToolBar', 'none');
+ set(hFigure, 'Name','Instrukcja zaznaczania punktów na obrazie usg')
+ Image = imread('instrukcja.jpg');
+ imshow(Image,'Border','tight');
+ title('Zaznacz odpowiednie punkty w przedstawionej kolejno¶ci');
 
- Image = imread('zdj01.jpg'); %podac obrazek
- myIcon = imresize(Image, [200, 200]);
- userPrompt = sprintf('Zaznacz odpowiednie punkty w przedstawionej kolejno¶ci');
- msgbox(userPrompt, 'Instrukcja zaznaczania punktów', 'custom', myIcon); % Note: custom is arg 3 now!
- end
-%[x,y] = ginput(6);
-%hold(handles.LoadedPicture,'on');
-%plot(x,y,'ro');
-%hold off
-%axes(handles.PictureWithPoints);
-%plot(x,y,'*');
+ waitfor(hFigure);
+ [x,y] = ginput(1); 
+ hold(handles.LoadedPicture,'on');
+ plot(x,y,'go');
+ [x1,y1] = ginput(1);
+ hold(handles.LoadedPicture,'on');
+ plot(x1,y1,'go');
+ [x2,y2] = ginput(1); 
+ hold(handles.LoadedPicture,'on');
+ plot(x2,y2,'go');
+ [x3,y3] = ginput(1); 
+ hold(handles.LoadedPicture,'on');
+ plot(x3,y3,'go');
+ [x4,y4] = ginput(1);
+ hold(handles.LoadedPicture,'on');
+ plot(x4,y4,'go');
+ [x5,y5] = ginput(1);
+ hold(handles.LoadedPicture,'on');
+ plot(x5,y5,'go');
+ 
+ wektor_pkt=[x,x1,x2,x3,x4,x5;y,y1,y2,y3,y4,y5];
+ 
+ hold off
+ axes(handles.PictureWithPoints);
+ plot(wektor_pkt,'*');
+ grid on;
