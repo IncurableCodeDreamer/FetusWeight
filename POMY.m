@@ -78,6 +78,7 @@ function LoadBtn_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global obraz 
 global rozmiar_obrazu;
+cla(handles.PictureWithPoints,'reset');
 set(handles.ScalNumber,'String','');
 sciezka=uigetfile('*.jpg');
 obraz=imread(sciezka);
@@ -116,7 +117,29 @@ function CountBtn_Callback(hObject, eventdata, handles)
 % hObject    handle to CountBtn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+global wartosc_piksela;
+x1=handles.x1;
+ x2=handles.x2;
+ y1=handles.y1;
+ y2=handles.y2;
+ x=handles.x;
+ x3=handles.x3;
+ y=handles.y;
+ y3=handles.y3;
+ x4=handles.x4;
+ x5=handles.x5;
+ y4=handles.y4;
+ y5=handles.y5;
+ HC=sqrt((x-x1)^2+(y-y1)^2)*wartosc_piksela*pi
+ AC=sqrt((x2-x3)^2+(y2-y3)^2)*wartosc_piksela*pi
+ FL=sqrt((x4-x5)^2+(y4-y5)^2)*wartosc_piksela
+ BW=10^(1.304+(0.05281*AC)+(0.1938*FL)-(0.004*(AC*FL)))
+ j='cm';
+ j2='g';
+ set(handles.text10,'String',strcat(num2str(HC),j))
+ set(handles.text9,'String',strcat(num2str(AC),j))
+ set(handles.text11,'String',strcat(num2str(FL),j))
+ set(handles.text12,'String',strcat(num2str(BW),j2))
 
 
 function ScalNumber_Callback(hObject, eventdata, handles)
@@ -146,8 +169,8 @@ function ScalBtn_Callback(hObject, eventdata, handles)
 % hObject    handle to ScalBtn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-global rozmiar_obrazu;
 global obraz;
+global wartosc_piksela;
 bool =true;
 x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  if isempty(x)
@@ -205,9 +228,37 @@ x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  hold(handles.LoadedPicture,'on');
  plot(x5,y5,'go');
  
- wektor_pkt=[x,x1,x2,x3,x4,x5;y,y1,y2,y3,y4,y5];
- 
+ wektor_pkt1=[x,x1,x2,x3,x4,x5;y,y1,y2,y3,y4,y5]
+ wektor_pkt1_1=[x x1; y y1];
+ wektor_pkt1_2=[x2 x3; y2 y3];
+ wektor_pkt1_3=[x4 x5; y4 y5];
  hold off
  axes(handles.PictureWithPoints);
- plot(wektor_pkt,'*');
+ points_plot=plot(wektor_pkt1(1,:),wektor_pkt1(2,:),'b*');
+ direction = [1 0 0];
+rotate(points_plot,direction,180)
+hold on
+points_plot1=plot(wektor_pkt1_1(1,:),wektor_pkt1_1(2,:),'r');
+ direction = [1 0 0];
+rotate(points_plot1,direction,180)
+points_plot2=plot(wektor_pkt1_2(1,:),wektor_pkt1_2(2,:),'r');
+ direction = [1 0 0];
+rotate(points_plot2,direction,180)
+points_plot3=plot(wektor_pkt1_3(1,:),wektor_pkt1_3(2,:),'r');
+ direction = [1 0 0];
+rotate(points_plot3,direction,180)
  grid on;
+ handles.x=x;
+handles.x1=x1;
+handles.y=y;
+handles.y1=y1;
+handles.x3=x3;
+handles.x2=x2;
+handles.y3=y3;
+handles.y2=y2;
+handles.x4=x4;
+handles.x5=x5;
+handles.y4=y4;
+handles.y5=y5;
+guidata(hObject,handles)
+guidata(hObject,handles)
