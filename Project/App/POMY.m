@@ -95,7 +95,7 @@ obraz= imresize(obraz, [resizePos(3) resizePos(3)]);
 axes(handles.LoadedPicture);
 imshow(obraz);
 set(handles.LoadedPicture,'Units','normalized');
-h = msgbox('Zaznacz dwa punkty, a nastêpnie wpisz rzeczywist± odleg³o¶æ miêdzy nimi. Potem naci¶nij przycisk SKALUJ','Skalowanie','help');
+h = msgbox('Zaznacz dwa punkty, a nastÃªpnie wpisz rzeczywistÂ± odlegÂ³oÂ¶Ã¦ miÃªdzy nimi. Potem naciÂ¶nij przycisk SKALUJ','Skalowanie','help');
 waitfor(h);
 
 [x1,y1] = ginput(1);
@@ -132,10 +132,10 @@ set(handles.text12, 'String', '');
   hFigure = figure;
  set(hFigure, 'MenuBar', 'none');
  set(hFigure, 'ToolBar', 'none');
- set(hFigure, 'Name','Instrukcja zaznaczania punktów na obrazie usg')
+ set(hFigure, 'Name','Instrukcja zaznaczania punktÃ³w na obrazie usg')
  Image = imread('instrukcja.jpg');
  imshow(Image,'Border','tight');
- title('Zaznacz odpowiednie punkty w przedstawionej kolejno¶ci');
+ title('Zaznacz odpowiednie punkty w przedstawionej kolejnoÂ¶ci');
 
  waitfor(hFigure);
  [x,y] = ginput(1); 
@@ -256,12 +256,12 @@ global wartosc_piksela;
 bool =true;
 x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  if isempty(x)
-     h = msgbox('Wprowad¼ warto¶æ liczbow±!','B³±d','error');
+     h = msgbox('WprowadÂ¼ wartoÂ¶Ã¦ liczbowÂ±!','BÂ³Â±d','error');
      set(handles.ScalNumber,'String','');
      bool =false;
  end
  if (x<=0)
-     h = msgbox('Wprowad¼ warto¶æ liczbow±!','B³±d','error');
+     h = msgbox('WprowadÂ¼ wartoÂ¶Ã¦ liczbowÂ±!','BÂ³Â±d','error');
      set(handles.ScalNumber,'String','');
      x=[];
      bool =false;
@@ -285,10 +285,10 @@ x = str2num(get(handles.ScalNumber,'String')); %edit1 being Tag of ur edit box
  hFigure = figure;
  set(hFigure, 'MenuBar', 'none');
  set(hFigure, 'ToolBar', 'none');
- set(hFigure, 'Name','Instrukcja zaznaczania punktów na obrazie usg')
+ set(hFigure, 'Name','Instrukcja zaznaczania punktÃ³w na obrazie usg')
  Image = imread('instrukcja.jpg');
  imshow(Image,'Border','tight');
- title('Zaznacz odpowiednie punkty w przedstawionej kolejno¶ci');
+ title('Zaznacz odpowiednie punkty w przedstawionej kolejnoÂ¶ci');
 
  waitfor(hFigure);
  [x,y] = ginput(1); 
