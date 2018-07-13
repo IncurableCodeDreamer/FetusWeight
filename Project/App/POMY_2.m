@@ -71,7 +71,7 @@ function varargout = POMY_2_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
-g = msgbox('Wprowad¼ tydzieñ ci±¿y, a nastêpnie naci¶nij przycisk ZATWIER¬','Statystyki','help');
+g = msgbox('WprowadÂ¼ tydzieÃ± ciÂ±Â¿y, a nastÃªpnie naciÂ¶nij przycisk ZATWIERÂ¬','Statystyki','help');
 waitfor(g);
 
 % --- Executes on button press in pushbutton1.
@@ -87,12 +87,12 @@ dane = load('tabele.txt');
 wiek = str2num(get(handles.ageTxt,'String'));
 bool=true;
 if isempty(wiek)
-     h = msgbox('Wprowad¼ warto¶æ liczbow±!','B³±d','error');
+     h = msgbox('WprowadÂ¼ wartoÂ¶Ã¦ liczbowÂ±!','BÂ³Â±d','error');
      set(handles.ScalNumber,'String','');
      bool =false;
  end
  if (wiek<16 || wiek>40)
-     h = msgbox('Wprowad¼ warto¶æ liczbow± z przedzia³u <16, 40>!','B³±d','error');
+     h = msgbox('WprowadÂ¼ wartoÂ¶Ã¦ liczbowÂ± z przedziaÂ³u <16, 40>!','BÂ³Â±d','error');
      set(handles.ScalNumber,'String','');
      x=[];
      bool =false;
